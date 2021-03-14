@@ -50,7 +50,8 @@ end
 The provision section is where we can specify the things we want to download and execute shell scripts we have written upon ```vagrant up```     
 
 
-## 1st Script Notes
+### Excercise One 
+---
 * Creates new Accounts
 * Checks for proper privileges
 * Report if account creation failed 
@@ -78,3 +79,84 @@ VALUE='this' # variable assignment
 echo '$WORD'
 echo "This is string interopulation $WORD"
 ```
+
+### Exercise Two 
+---
+* Focus is Conditionals 
+```sh
+# Display the UID and the username of the user executing this script 
+# Display if the user is root user or not
+
+# Display UID
+echo "Your UID is ${UID}"
+
+# Display Username 
+USER_NAME=`id -un`
+echo "Your username is ${USER_NAME}"
+
+# Display if user is root user or not 
+if [[ "${UID}" -eq 0 ]]
+then
+ echo 'You are the root user'
+else
+ echo 'You are not the root'
+fi
+
+```
+
+### Exercise Three
+--- 
+* Focuses is what to do with conditionals that fail and also how to handle exit statuses. 
+* ```=``` when we look for an exact match
+* ```==``` when we want to match via pattern 
+
+```${?}``` Special variable that holds the exit status of the most recently used command
+
+
+### Exercise Four
+---
+* User Input
+* Create Users 
+* Naming Conventions
+* More quoting
+
+* Putting something in quotes treats it as a single argument 
+<em> All code snippets in the demos and exercise directory </em>
+
+**User input**
+1. Read built in shell command
+``` read -p 'Type Something' MYVAR```
+2. Accept arguments via command line
+
+
+
+### AddUser_v1
+--- 
+**Goal**: Create a user that adds a user to the same linux system that the script is executed on. 
+
+<em> List Users </em>: ```less /etc/passwd```
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

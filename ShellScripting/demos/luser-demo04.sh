@@ -22,3 +22,9 @@ echo ${PASSWORD} | passwd --stdin ${USER_NAME}
 
 # Force password change on first login.
 passwd -e ${USER_NAME}
+
+
+dougstamper:x:1001:1002::/home/dougstamper:/bin/bash
+jonathan:x:1002:1003::/home/jonathan:/bin/bash
+jack:x:1003:1004::/home/jack:/bin/bash
+test:x:1004:1005::/home/test:/bin/bash
