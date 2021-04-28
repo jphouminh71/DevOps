@@ -135,7 +135,124 @@ fi
 **Goal**: Create a user that adds a user to the same linux system that the script is executed on. 
 
 <em> List Users </em>: ```less /etc/passwd```
+
+
+
+
+
+### Excercise 3
+--- 
+* Password Generation / Hashing
+* Random Data
+* Text / String manipuation 
+
+```!v``` this takes you to vim of the most recent file you edited 
+
+* Wrap commands you want to use in scripts with ```$()```
+
+
+```shuf```: generates random permutations. "shuffle" the string
+
+
+**Parameter**: variable that is being used inside the shell script
+**Argument**: data that is being passed into the shell script
+
+```${0}``` the name of the script itself and how we called it
+```${1..}``` the passed in parameters from the user
+
+
+**Shell Exeuction**: 
+* If there exists a shell function by that name, that function is invoked
+* If the name doesn't match then the shell searches for it in the shell 
+built ins
+* If the name is neither a shell function nor a builtin, and conains no slashes, **bash** searches each element of the PATH for a directory containing an executable file by that name.
+
+```[vagrant@localhost vagrant]$ sudo cp commandArg.sh /usr/local/bin/```, Now we don't have to specify the path to the program as bash looks here automatically. So if you want to store a script inside the path environment you need to put it in the environment variables so that bash can find it in there, otherwise to execute you must specify the entire path to the executable. 
+
+
+
+**PATH VARIABLES**: This is a list of directories that bash will look for executable scripts in. If you had a script on your desktop and you didn't want to always specify calling with the direct path then you could add the script to the PATH so that it will automatically be searched here
+
+```which```: shows you where that program or script you are calling is being called from
+
+example
+```which head``` prints ```/usr/bin/head```, this means that bash will execute a program called ```head``` located in this directory.
+
+```which -a head```: this will list out all matching programs that bash finds
+
+
+**Special Parameters**
+* There are list of special bash parameters that return metadata. ```#``` returns the number of command line arguments. ```UID```: returns the current users ID. 
+
+
+
+**For loops**
+```
+for X in Frank Claire Doug
+do
+ echo "Hi ${X}." 
+done
+```
+
+
+**While Loops/InfiniteLoops/Shifting/Sleeping**
+* Sleep command blocks the process for specified time
+```
+# while loop through parameters
+echo 'looping through params'
+ARGS=${@}
+X=1
+
+# shift moves all positional arguments down one index, so you pick each element up at index 1
+while  [[ ${#} -ne 0 ]]
+do
+ echo "Number of Parameters: ${#}"
+ echo "Next Arg: ${1}"
+ shift
+done
+```
 <br>
+
+### Standard Input/Output , Standard Error
+--- 
+**Standard Input**: Input that comes from your keyboard. Doesn't have to come from keyboard you can also pipe it from commands such as ```echo ${PASSWORD} | passwd --stdin ${USER_NAME}```
+**Standard/Error Output**: These are by default displayed to user.
+
+```>```: redircts content, overwrites if already exist otherwise creates the file
+
+```>>```: appends instead of overwriting existing content. 
+
+
+**stderr/ stdout**
+
+All output is by default sent to stdout 
+```head -n1 /etc/passwd /etc/hosts /fakefile > head.out ```
+
+I want all output put in head.out but all errors (2) to go to head.err
+```head -n1 /etc/passwd /etc/hosts /fakefile >head.out  2> head.err```
+
+I want all error and output to go to the same place
+
+old way
+```head -n1 /etc/passwd /etc/hosts /fakefile > head.both 2>&1 ```
+new way
+```head -n1 /etc/passwd /etc/hosts /fakefile &>> head.both```
+
+* By default ```stderr``` does not flow through pipes so if you wanted them two then you have to route the ```stderr``` to flow through to ```stdout``` like you did above.
+
+```head -n1 /etc/passwd /etc/hosts /fakefile |& cat -n```
+
+
+**The null device**: redirect anything that you don't want to see to this place as it will just be like a black hole. You might want to use this if you have output that you don't want the user to see. 
+
+redirecting all stdout to /dev/null, so we are left with stderr
+```head -n1 /etc/passwd /etc/hosts /fakefile > /dev/null```
+```
+head -n1 /etc/passwd /etc/hosts /fakefile &> /dev/null
+head -n1 /etc/passwd /etc/hosts /fakefile 1> /dev/null
+```
+
+
 <br>
 <br>
 <br>
