@@ -164,7 +164,6 @@ We can append using the double '>' symbol
 * Just remember that in this case since we outputted to another bash script we must also change the permissions
 
 If we want to disregard shell output
-```
     # this path in the file system is where all the ignored shit goes. 
     ./run2.sh > /dev/null 
 ```
